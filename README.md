@@ -8,5 +8,5 @@ Nous souhaitons proposer une solution qui va aider à la création de cours inte
 Johanna Delachambre  
 Stéphane Désiré  
 Sabrina Mercuri  
-Christophe Santamaria 
+Christophe Santamaria  
 Yann Soca
