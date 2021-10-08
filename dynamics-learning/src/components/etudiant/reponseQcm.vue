@@ -1,30 +1,31 @@
 <template>
   <v-app>
-    <form>
-      <h1>QCM - {{ qcm.nom }}</h1>
-      <v-card v-for="(question, index) in qcm.questions" :key="index">
-        <div v-if="question.trueRep.length == 1">
-          <h2>{{ index + 1 }} - {{ question.intitule }}</h2>
-          <p>1 réponse</p>
-          <v-radio-group>
-          <v-radio v-for="(reponse,index2) in getAnswer(question)" :key="index2"
-              :label="reponse"
-              :color="isTrueRep(question,reponse)"
-            ></v-radio>
-            </v-radio-group>
+    <h1>QCM - {{ qcm2.nom }}</h1>
+    <v-card v-for="(question, index) in qcm2.questions" :key="index">
+      <div v-if="question.trueRep.length == 1">
+        <h2>{{ index + 1 }} - {{ question.intitule }}</h2>
+        <p>1 réponse</p>
+        <v-radio-group>
+          <v-radio
+            v-for="(reponse, index2) in getAnswer(question)"
+            :key="index2"
+            :label="reponse"
+            :color="isTrueRep(question, reponse)"
+          ></v-radio>
+        </v-radio-group>
+      </div>
+      <div v-if="question.trueRep.length !== 1">
+        <h2>{{ index + 1 }} - {{ question.intitule }}</h2>
+        <p>plusieurs réponses</p>
+        <div v-for="(reponse, index3) in getAnswer(question)" :key="index3">
+          <v-checkbox
+            :label="reponse"
+            :color="isTrueRep(question, reponse)"
+          ></v-checkbox>
         </div>
-        <div v-if="question.trueRep.length !== 1">
-          <h2>{{ index + 1 }} - {{ question.intitule }}</h2>
-          <p>plusieurs réponses</p>
-          <div v-for="(reponse,index3) in getAnswer(question)" :key="index3">
-              <v-checkbox
-              :label="reponse"
-              :color="isTrueRep(question,reponse)"
-            ></v-checkbox>
-          </div>
-        </div>
-      </v-card>
-    </form>
+      </div>
+    </v-card>
+    <v-btn @click="envoiReponse()">Terminer</v-btn>
   </v-app>
 </template>
 
@@ -33,9 +34,16 @@ export default {
   name: "App",
 
   components: {},
-
+  props:{
+    // le qcm afficher sera dans les props
+    qcm : Object
+  },
   data: () => ({
-    qcm: {
+    reponses: []
+  }),
+  created(){
+    this.qcm = {
+      
       nom: "Pokemon",
       mdp: "",
       questions: [
@@ -51,13 +59,14 @@ export default {
         },
         {
           intitule:
-            "Comment s'appel les protagonise de la team rocket les plus connus ?",
+            "Comment s'appellent les protagonistes de la team rocket les plus connus ?",
           falseRep: ["Boule et Bill", "Azur et Asmar"],
           trueRep: ["Jessie et James"],
         },
       ],
-    },
-  }),
+    }
+    this.qcm2 = this.qcm
+  },
   methods: {
     getAnswer: function (question) {
       let tabRep = question.falseRep;
@@ -85,6 +94,9 @@ export default {
       }
       return "error";
     },
+    envoiReponse: function(){
+      this.$socket.emit("envoiReponse",this.reponses)
+    }
   },
 };
 </script>
