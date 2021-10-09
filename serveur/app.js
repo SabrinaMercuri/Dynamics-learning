@@ -18,8 +18,9 @@ io.on('connection', (socket) => {
     console.log(`Connecté au client ${socket.id}`);
 
 
-    socket.on('envoiReponse',() => {
-       console.log("envoie de réponse")
+    socket.on('envoiReponse',(data) => {
+       console.log("envoie de réponse : ")
+       console.log(data)
     })
 
 });
