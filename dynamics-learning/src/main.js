@@ -5,7 +5,7 @@ import socketio from 'socket.io-client';
 import VueSocketIO from 'vue-socket.io';
 
 
-export const SocketInstance = socketio('http://localhost:3000');
+export const SocketInstance = socketio('http://localhost:3001');
 //export const SocketInstance = socketio('https://monopolymiage.herokuapp.com/'); pour la mise en ligne 
 
 Vue.use(new VueSocketIO({
