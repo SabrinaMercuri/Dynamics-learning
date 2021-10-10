@@ -37,7 +37,6 @@ export default {
 
   components: {},
   props:{
-    // le qcm afficher sera dans les props
     qcm : Object
   },
   data: () => ({
@@ -45,37 +44,16 @@ export default {
     repEnvoyees: []
   }),
   created(){
-    this.qcm = {
-      
-      nom: "Pokemon",
-      mdp: "",
-      questions: [
-        {
-          intitule: "Combien d'évolution à évoli ?",
-          falseRep: ["1", "5", "7"],
-          trueRep: ["8"],
-        },
-        {
-          intitule: "Quel type est éfficace contre le type dragon ?",
-          falseRep: ["acier", "feu"],
-          trueRep: ["dragon", "glace", "sol"],
-        },
-        {
-          intitule:
-            "Comment s'appellent les protagonistes de la team rocket les plus connus ?",
-          falseRep: ["Boule et Bill", "Azur et Asmar"],
-          trueRep: ["Jessie et James"],
-        },
-      ],
-    }
     this.qcm2 = this.qcm
-    for(let i = 0; i <this.qcm.questions.length; i++){
+    for(let i = 0; i <this.qcm2.questions.length; i++){
       if(this.qcm.questions[i].trueRep.length>1){
         this.reponses[i] = []
-        for(let j = 0; j < this.qcm.questions[i].trueRep.length; j++){
+        for(let rep of this.qcm.questions[i].trueRep){
+          console.log(rep)
           this.reponses[i][this.reponses[i].length] = undefined
         }
-        for(let k = 0; k < this.qcm.questions[i].falseRep.length; k++){
+        for(let rep of this.qcm.questions[i].falseRep){
+          console.log(rep)
           this.reponses[i][this.reponses[i].length] = undefined
         }
       }
@@ -152,14 +130,16 @@ export default {
           let temp = this.reponses[i]
           let nbRepJuste = 0
           let nbRepFausse = 0
-          for(let j = 0; j < this.reponses[i].length; j++){
-            if(this.reponses[i][j]===false){
+
+          for(let rep of this.reponses[i]){
+            if(rep===false){
               nbRepFausse++
             }
-            else if(this.reponses[i][j]===true){
+            else if(rep===true){
               nbRepJuste++
             }
           }
+
           if(nbRepFausse>0 || nbRepJuste<this.qcm.questions[i].trueRep.length){
             this.repEnvoyees[i] = false
           }
