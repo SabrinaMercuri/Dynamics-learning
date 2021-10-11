@@ -5,13 +5,14 @@
         </div>
 
         <div class = "outils">
+            
             <v-card id="qcm" elevation="8">
                 <v-card-title class="justify-center">QCM</v-card-title>
                 <v-card-text class=text-center>
                 <img src="../../assets/questionnaire.png" alt="Icon" 
                 style="max-height: 50px; max-width: 50px"
                 /><br>
-                <router-link to="/qcm"><v-btn flat color="orange">Créer</v-btn></router-link>
+                <router-link to="/Qcm"><v-btn flat color="orange">Créer</v-btn></router-link>
                 </v-card-text>
             </v-card>
             <v-card id="sondage" elevation="8">
@@ -57,7 +58,7 @@
 <style scoped>
 
 #qcm, #sondage, #brainstorming, #loadingbar, #text{
-    width : 40%;
+    width : 20%;
     background-color : rgb(224, 221, 221);
     margin: 5%;
     
