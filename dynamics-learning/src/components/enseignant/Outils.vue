@@ -11,7 +11,7 @@
                 <img src="../../assets/questionnaire.png" alt="Icon" 
                 style="max-height: 50px; max-width: 50px"
                 /><br>
-                <v-btn flat color="orange">Créer</v-btn>
+                <router-link to="/qcm"><v-btn flat color="orange">Créer</v-btn></router-link>
                 </v-card-text>
             </v-card>
             <v-card id="sondage" elevation="8">
@@ -20,7 +20,7 @@
                 <img src="../../assets/sondage.png" alt="Icon" 
                 style="max-height: 50px; max-width: 50px"
                 /><br>
-                <v-btn flat color="grey">A venir</v-btn>
+                <v-btn flat disabled color="grey">A venir</v-btn>
                 </v-card-text>
             </v-card>
             <v-card id = "brainstorming" elevation="8">
@@ -29,7 +29,7 @@
                 <img src="../../assets/brainstorming.png" alt="Icon" 
                 style="max-height: 50px; max-width: 50px"
                 /><br>
-                <v-btn flat color="grey">A venir</v-btn>
+                <v-btn flat disabled color="grey">A venir</v-btn>
                 </v-card-text>
             </v-card>
             <v-card id="loadingbar" elevation="8">
@@ -38,7 +38,7 @@
                 <img src="../../assets/loading.png" alt="Icon" 
                 style="max-height: 50px; max-width: 50px"
                 /><br>
-                <v-btn flat color="grey">A venir</v-btn>
+                <v-btn flat disabled color="grey">A venir</v-btn>
                 </v-card-text>
             </v-card>
             <v-card id="text" elevation="8">
@@ -47,7 +47,7 @@
                 <img src="../../assets/text.png" alt="Icon" 
                 style="max-height: 50px; max-width: 50px"
                 /> <br>
-                <v-btn flat color="grey">A venir</v-btn>
+                <v-btn flat disabled color="grey">A venir</v-btn>
                 </v-card-text>
             </v-card>
         </div>
