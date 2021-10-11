@@ -17,7 +17,44 @@ export default {
   },
 
   data: () => ({
-    qcmSelectione:{}
+    qcmSelectione:{
+      nom:"Pokemon",
+      mdp:"",
+      questions:[
+        {
+          intitule:"Quel est le premier pokemon de Sacha ?",
+          falseRep:[
+            "Dracaufeu",
+            "Carapuce"
+          ],
+          trueRep:[
+            "pikachu"
+          ]
+        },
+        {
+          intitule:"Quel sont les types de Dracaufeu ?",
+          falseRep:[
+            "eau",
+            "electrik"
+          ],
+          trueRep:[
+            "feu",
+            "vol"
+          ]
+        },
+        {
+          intitule:"Combien de badges d'arènes il y a par région ?",
+          falseRep:[
+            "'4",
+            "7",
+            "2"
+          ],
+          trueRep:[
+            "8"
+          ]
+        }
+      ]
+    }
   }),
 };
 </script>
