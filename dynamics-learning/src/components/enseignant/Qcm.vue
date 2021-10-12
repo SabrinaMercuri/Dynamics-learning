@@ -1,168 +1,146 @@
 <template>
-  <div class="container-app">
-    <div class="header">
-      <!-- Compartiment Header -->
-      
-        <!-- Nom du QCM -->
-      <h1>Nom du QCM</h1>
+    <div class="all">
 
-    <v-text-field
-          
-          :counter="100"
-          label="Nom du QCM"
-          style="background: #ffeaa7"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-          v-model="qcm.nom"
-    ></v-text-field>
-
-
-    </div>
-
-    <!-- ------------------------------------------------------------------------------------------- -->
-<v-form
-    ref="form"
->
-    <v-card 
-    v-for="(question, nbQuestion) in qcm.questions" :key="nbQuestion" >
-
-      <!-- Compartiment Main -->
-
-        <!-- Nom de la question -->
-      <h2>Question</h2>
-        
-
-        <v-text-field
-          v-model="intitute"
-          :counter="100"
-          label="Nom de la question"
-          style="background: #74b9ff"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
-
-        <v-card>
-          <p>Difficulté de la question</p>
-          <v-rating
-            background-color="green lighten-2"
-            label="Difficultyyy"
-            color="red"
-          
-            length="5"
-            size="64"
-            value="3"
-          ></v-rating>
+      <h1> Création de QCM </h1>
+        <v-card class="top"  elevation="12">
+        <!-- Nom du Qcm -->
+        <h1>Nom du QCM :</h1>
+        <v-text-field v-model="qcm.nom" label="Nom du QCM" required></v-text-field>
+        <!-- Mdp du Qcm -->
+        <h1>Mot de passe du QCM :</h1>
+        <v-text-field v-model="qcm.mdp" label="Mdp du QCM" required></v-text-field>
         </v-card>
-
-        
-      <v-text-field
-          v-model="trueRep"
-          :counter="100"
-          label="Bonne réponse"
-          style="background: #00b894"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-      ></v-text-field>
-
-      
-
-      <v-text-field
-          v-model="falseRep"
-          :counter="100"
-          label="Mauvaise réponse"
-          style="background: #d63031"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-      ></v-text-field>
-
-    <v-checkbox
-      v-model="checkbox"
-      label="Plusieurs réponses possibles ?'"
-      
-    ></v-checkbox>
-
-
-    
-
-
-
-      </v-card>
-      </v-form>
-      <v-btn
-          color="secondary"
-          elevation="2"
-          @click="ajouterQuestion()"
-      >
-      +
-      </v-btn>
-
-
-
-      
-
-
-      
-    <!-- --------------------------------------------------------------------------------------------- -->
-    <div class="footer">
-      <!-- Compartiment Footer -->
-      <form class="flex flex-col" @submit.prevent="submitQCM">
-        </form>
-
-      <v-btn type="submit" class="border rounded py-3" color="primary"
-        >Créer le QCM !
-      </v-btn>
-
-      <v-btn
-        color="error"
-        class="mr-4"
-       
-        @click="reset"
-        >Reset Question
-    </v-btn>
-
+        <!-- Questions -->
+        <v-form ref="form">
+        <div :key="render">
+            <v-card v-for="(question,index) in qcm.questions" :key="index" class="question" elevation="8">
+                <!-- Intitule de la question -->
+                <br>
+                <br>
+                <h2>Intitule de la question :</h2>
+                <v-text-field v-model="qcm.questions[index].intitule" label="Intitule de la question" required style="background: #74b9ff"></v-text-field>
+                <!-- Mauvaises réponse de la question -->
+                <h2>Mauvaise réponses : </h2>
+                <v-text-field
+                    v-for="(fausseRep,index2) in qcm.questions[index].falseRep"
+                    :key="index2" 
+                    v-model="qcm.questions[index].falseRep[index2]" 
+                    label="Mauvaise reponse" 
+                    required
+                    style="background: #d63031"
+                    ></v-text-field>
+                <br>
+                <v-btn @click="addMauvaiseRep(index)" style="background: #d63031">ajout mauvaise reponse</v-btn>
+                <!-- Bonne(s) réponse de la question -->
+                <br>
+                -------------------------------
+                <br>
+                <h2>Bonnes réponses : </h2>
+                <v-text-field
+                    v-for="(vraiRep,index3) in qcm.questions[index].trueRep"
+                    :key="index3" 
+                    v-model="qcm.questions[index].trueRep[index3]" 
+                    label="Bonne reponse" 
+                    required
+                    style="background: #00b894"
+                    ></v-text-field>
+                <v-btn @click="addBonneRep(index)"
+                style="background: #00b894">ajout bonne reponse</v-btn>
+            </v-card>
+            <br>
+            <br>
+            <v-btn @click="addQuestion()" color="primary"> ajouter une question</v-btn>
+            <v-btn @click="removeQuestion()" color="error"> supprimer une question</v-btn>
+            <br>
+            <br>
+            <br>
+            <v-toolbar
+      dark
+      prominent
+      src=""
+    >
+            
+            <v-btn @click="envoyerQcm()" color="primary"> envoyer le qcm</v-btn>
+            <v-btn color="error" class="mr-4" @click="reset">Réinitialiser le formulaire</v-btn>
+            </v-toolbar>
+        </div>
+        </v-form>
     </div>
-  </div>
 </template>
-
-
 <script>
-    export default {
-      data: () => ({
+export default {
+    data: () => ({
         qcm : {
-          nom:"",
-          mdp:"",
-          questions:[
-            {
-            intitute:"",
-            falseRep:[""],
-            trueRep:[""],
+            nom:"",
+            mdp:"",
+            questions:[
+                {
+                    intitule:"",
+                    falseRep:[],
+                    trueRep:[]
+                }
+            ]
+        },
+        render:0
+    }),
+    methods:{
+        addMauvaiseRep: function(index){
+            this.qcm.questions[index].falseRep[this.qcm.questions[index].falseRep.length]=""
+            this.render++
+        },
+        addBonneRep: function(index){
+            this.qcm.questions[index].trueRep[this.qcm.questions[index].trueRep.length]=""
+            this.render++
+        },
+        addQuestion: function(){
+            this.qcm.questions[this.qcm.questions.length] = {
+                intitule:"",
+                falseRep:[],
+                trueRep:[]
             }
+            this.render++
+        },
+        removeQuestion: function(){
+            // supprimer une question 
 
-          ]
-        }
-      }),
-      methods: {
-        submitQCM: function() {
-          console.log("QCM envoyé")
         },
         reset () {
         this.$refs.form.reset()
-      },
-        ajouterQuestion(){
-          this.qcm.questions[
-             this.qcm.questions.length
-          ] = {
-            intitute:"",
-            falseRep:[""],
-            trueRep:[""],
-          } 
-          console.log(this.qcm.questions.length)
         }
-      }
     }
-
+}
 </script>
+
+
+
+<style>
+
+.top{
+
+margin-bottom: 2%;
+padding: 2%;
+text-align: center;
+background-color: #f6e58d;
+
+
+
+}
+
+.all{
+  width: 65%;
+  margin:10%;
+  
+ 
+  margin: 0 auto;
+}
+
+.question{
+
+padding: 2%;
+text-align: center;
+}
+
+
+</style>
+
+```
