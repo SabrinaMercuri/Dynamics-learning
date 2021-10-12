@@ -60,13 +60,21 @@
       src=""
     >
             
+            <!-- // Bouton envoyer le QCM 
+            // Reste a faire : 
+                // - Envoyer le QCM -->
+
             <v-btn @click="envoyerQcm()" color="primary"> envoyer le qcm</v-btn>
+            
+            <!-- // Bouton reinitialiser lee formulaire -->
             <v-btn color="error" class="mr-4" @click="reset">Réinitialiser le formulaire</v-btn>
             </v-toolbar>
         </div>
         </v-form>
     </div>
 </template>
+
+
 <script>
 export default {
     data: () => ({
@@ -101,6 +109,7 @@ export default {
             this.render++
         },
         removeQuestion: function(){
+            
             // supprimer une question 
 
         },
