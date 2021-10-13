@@ -7,6 +7,7 @@ app.use(cors());
 
 // ajout de socket.io
 const server = require('http').Server(app)
+const stats = [[true,false,true]]
 const io = require('socket.io')(server, {
    cors: {
       origin: '*',
@@ -21,12 +22,11 @@ io.on('connection', (socket) => {
     socket.on('envoiReponse',(data) => {
        console.log("envoie de réponse : ")
        console.log(data)
+        stats[stats.length] = data;
     })
-    socket.on('demandeReponse',(demande) =>{
-       console.log(demande)
-       socket.emit('envoieReponsestats',(data))
-    }
-
+    socket.on('demandeReponse',() =>{
+       socket.emit('envoieReponseStats',stats)
+    })
 
 });
 

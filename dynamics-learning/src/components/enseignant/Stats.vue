@@ -9,28 +9,40 @@
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 export default {
-    name: "Stats",
-
-created(){
-var socket = io.connect();
-var reponse = []
-socket.emit('demandeReponse');
-
-var chart = am4core.create("chartdiv", am4charts.PieChart);
-chart.data = [{
-  "Réponse": "Fausse",
-  "Résultat": 1
-}, {
-  "Réponse": "Vrai",
-  "Résultat": 2,
-}
-];
+  name: "Stats",
+  sockets: {
+    envoieReponseStats: function (stats) {
+      var chart = am4core.create("chartdiv", am4charts.PieChart);
+      var rept = 0;
+      var repf =0;
+      for(let i =0; i<stats.length; i++) {
+        for(let j = 0; j <stats[i].length; j++) {
+          if(stats[i][j]) {
+            rept +=1;
+          }
+          else {
+            repf += 1;
+          }
+        }
+      }
+      chart.data = [{
+        "Réponse": "Fausse",
+        "Résultat": repf
+      }, {
+        "Réponse": "Vrai",
+        "Résultat": rept,
+      }
+      ];
 
 // Add and configure Series
-var pieSeries = chart.series.push(new am4charts.PieSeries());
-pieSeries.dataFields.value = "Résultat";
-pieSeries.dataFields.category = "Réponse";
-}
+      var pieSeries = chart.series.push(new am4charts.PieSeries());
+      pieSeries.dataFields.value = "Résultat";
+      pieSeries.dataFields.category = "Réponse";
+    }
+  },
+created() {
+    this.$socket.emit('demandeReponse');
+  }
 }
 </script>
 
