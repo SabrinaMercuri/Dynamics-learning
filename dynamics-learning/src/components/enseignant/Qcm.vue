@@ -113,6 +113,10 @@ export default {
             // supprimer une question 
 
         },
+        envoyerQcm: function(){
+            console.log(this.qcm)
+            this.$socket.emit("sendQcm",this.qcm)
+        },
         reset () {
         this.$refs.form.reset()
         }

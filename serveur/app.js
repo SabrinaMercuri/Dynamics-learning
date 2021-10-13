@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+const qcms = []
 
 // ajout de socket.io
 const server = require('http').Server(app)
@@ -21,6 +22,11 @@ io.on('connection', (socket) => {
     socket.on('envoiReponse',(data) => {
        console.log("envoie de réponse : ")
        console.log(data)
+    })
+
+    socket.on('sendQcm',(data) => {
+      console.log(data)
+      qcms[qcms.length] = data
     })
 
 });
