@@ -33,6 +33,7 @@
         </div>
         </div>
         <div class="card">
+          <span class="titre">Mes outils</span>
           <v-card id="qcm" elevation="8">
             <v-card-title class="justify-center">QCM</v-card-title>
             <v-card-text class="text-center">
@@ -55,6 +56,33 @@
               <v-btn flat disabled color="grey">A venir</v-btn>
             </v-card-text>
           </v-card>
+          <v-card id = "brainstorming" elevation="8">
+                <v-card-title class="justify-center">Brainstorming</v-card-title>
+                <v-card-text class=text-center>
+                <img src="./assets/brainstorming.png" alt="Icon" 
+                style="max-height: 50px; max-width: 50px"
+                /><br>
+                <v-btn flat disabled color="grey">A venir</v-btn>
+                </v-card-text>
+            </v-card>
+            <v-card id="loadingbar" elevation="8">
+                <v-card-title class="justify-center">Loading Bar</v-card-title>
+                <v-card-text class=text-center>
+                <img src="./assets/loading.png" alt="Icon" 
+                style="max-height: 50px; max-width: 50px"
+                /><br>
+                <v-btn flat disabled color="grey">A venir</v-btn>
+                </v-card-text>
+            </v-card>
+            <v-card id="text" elevation="8">
+                <v-card-title class="justify-center">Textes à trous</v-card-title>
+                <v-card-text class=text-center>
+                <img src="./assets/text.png" alt="Icon" 
+                style="max-height: 50px; max-width: 50px"
+                /> <br>
+                <v-btn flat disabled color="grey">A venir</v-btn>
+                </v-card-text>
+            </v-card>
         </div>
       </div>
     </div>
@@ -127,6 +155,13 @@ export default {
   cursor: pointer;
   position: relative;
   margin-top: 50px;
+}
+
+.titre {
+  text-align: center;
+  height: 5%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 100px;
 }
 
 #qcm,
