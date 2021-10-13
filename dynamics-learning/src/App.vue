@@ -11,18 +11,18 @@
         </v-list>
         <v-divider></v-divider>
         <v-list nav dense>
-          <v-list-item @click="mesoutils()" link class="menu-items">
-            <v-list-item-title class="menu-props">Mes outils</v-list-item-title>
-          </v-list-item>
-          <v-list-item class="menu-items">
-            <v-list-item-title class="menu-props">Mes cours</v-list-item-title>
-          </v-list-item>
-          <v-list-item class="menu-items">
-            <v-list-item-title class="menu-props">Mes statistiques</v-list-item-title>
-          </v-list-item>
-          <v-list-item class="menu-items">
-            <v-list-item-title class="menu-props">Paramètres</v-list-item-title>
-          </v-list-item>
+          <button  class="button" x-large>
+            Mes cours
+          </button>
+          <button  class="button" x-large>
+            Mes outils
+          </button>
+          <button  class="button" x-large>
+            Mes statistiques
+          </button>
+          <button  class="button" x-large>
+            Paramètres
+          </button>
         </v-list>
       </v-navigation-drawer>
       <v-divider vertical></v-divider>
@@ -94,6 +94,17 @@
 .outils{
   border-left-style: groove;
   border-width:0.5ex;
+}
+
+.button {
+  width: 300px;
+  height: 70px;
+  font-size: 30px;
+  font-weight: 200;
+  outline: 0;
+  cursor: pointer;
+  position: relative;
+  margin-top:50px;
 }
 
 </style>
