@@ -17,6 +17,12 @@ io.on('connection', (socket) => {
 
     console.log(`Connecté au client ${socket.id}`);
 
+
+    socket.on('envoiReponse',(data) => {
+       console.log("envoie de réponse : ")
+       console.log(data)
+    })
+
 });
 
 server.listen(3001, function () {  // mettre process.env.PORT à la place de 3000 pour le deploiement en ligne
