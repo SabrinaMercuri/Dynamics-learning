@@ -22,6 +22,11 @@ io.on('connection', (socket) => {
        console.log("envoie de réponse : ")
        console.log(data)
     })
+    socket.on('demandeReponse',(demande) =>{
+       console.log(demande)
+       socket.emit('envoieReponsestats',(data))
+    }
+
 
 });
 
