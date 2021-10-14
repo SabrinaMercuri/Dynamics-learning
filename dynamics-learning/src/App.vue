@@ -1,68 +1,147 @@
 <template>
-  <v-app>
-    <Stats />
-    <!--Qcm/>
-    A afficher quand le qcm aura été selectionné et que l'étudiant aura entré le bon mdp
-    <ReponseQcm :qcm="qcmSelectione"/>
-    qcmSelectione est le qcm choisi par l'utilisateur qui sera affiché si celui-ci met le bon mdp-->
-  </v-app>
+  <div>
+    <div class="accueil" v-if="!etudiant && !enseignant">
+      <div class="logo">
+        <v-img src="./assets/logo.png"></v-img>
+      </div>
+      <div class="buttons">
+        <button class="button1" x-large @click="acceuilens()">Enseignant</button>
+        <button class="button2" x-large @click="acceuiletu()">Etudiant</button>
+      </div>
+    </div>
+    <div v-if="enseignant">
+      <Accueilens v-if="!clickqcm" @recupdonnees="affichageqcm()"/>
+      <Qcm v-if="clickqcm"/>
+    </div>
+    <div v-if="etudiant">
+      <Accueiletu />
+    </div>
+  </div>
 </template>
 
 <script>
-//import ReponseQcm from "./components/etudiant/ReponseQcm"
-import Stats from './components/enseignant/Stats';
-
-//import Qcm from "./components/enseignant/Qcm";
-
+import Accueilens from "./components/enseignant/Accueilens.vue";
+import Accueiletu from "./components/etudiant/Accueiletu.vue";
 export default {
-  
-  name: 'App',
+  name: "App",
 
   components: {
-   //ReponseQcm,
-    Stats,
-    //Qcm
+    Accueilens,
+    Accueiletu
   },
 
   data: () => ({
-    qcmSelectione:{
-      nom:"Pokemon",
-      mdp:"",
-      questions:[
-        {
-          intitule:"Quel est le premier pokemon de Sacha ?",
-          falseRep:[
-            "Dracaufeu",
-            "Carapuce"
-          ],
-          trueRep:[
-            "pikachu"
-          ]
-        },
-        {
-          intitule:"Quel sont les types de Dracaufeu ?",
-          falseRep:[
-            "eau",
-            "electrik"
-          ],
-          trueRep:[
-            "feu",
-            "vol"
-          ]
-        },
-        {
-          intitule:"Combien de badges d'arènes il y a par région ?",
-          falseRep:[
-            "'4",
-            "7",
-            "2"
-          ],
-          trueRep:[
-            "8"
-          ]
-        }
-      ]
-    }
+    etudiant: false,
+    enseignant: false,
+    clickqcm: false,
   }),
+  methods: {
+    acceuilens: function() {
+      this.enseignant = true;
+    },
+    acceuiletu: function() {
+      this.etudiant = true;
+    },
+    affichageqcm: function() {
+      this.clickqcm = true;
+    }
+  }
 };
 </script>
+
+<style scoped>
+.accueil {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /*margin-left: 300px;*/
+}
+
+.logo {
+  /*background-image: url(./assets/logo.png);
+  background-position: center;
+  background-size: cover;*/
+  align-items: center;
+  width: 40%;
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 150px;
+}
+
+.buttons {
+  width: 40%;
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.button1 {
+  width: 500px;
+  height: 120px;
+  margin-right: 150px;
+  font-size: 30px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.button2 {
+  width: 500px;
+  height: 120px;
+  font-size: 30px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.button1::after {
+  content: "";
+  background-color: #5dade2;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 15px;
+  left: 15px;
+  transition: 0.2s;
+}
+
+.button2::after {
+  content: "";
+  background-color: #5dade2;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 15px;
+  left: 15px;
+  transition: 0.2s;
+}
+
+.button1:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
+.button2:hover::after {
+  top: 0px;
+  left: 0px;
+}
+</style>
