@@ -7,7 +7,6 @@
         </div>
         <v-list nav dense>
           <button class="button" x-large>Mes cours</button>
-          <button class="button" x-large>Mes outils</button>
           <button class="button" x-large>Mes statistiques</button>
           <button class="button" x-large>Paramètres</button>
         </v-list>
