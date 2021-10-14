@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+const qcms = []
 
 // ajout de socket.io
 const server = require('http').Server(app)
@@ -28,8 +29,13 @@ io.on('connection', (socket) => {
        socket.emit('envoieReponseStats',stats)
     })
 
+    socket.on('sendQcm',(data) => {
+      console.log(data)
+      qcms[qcms.length] = data
+    })
+
 });
 
-server.listen(3000, function () {  // mettre process.env.PORT à la place de 3000 pour le deploiement en ligne
+server.listen(3001, function () {  // mettre process.env.PORT à la place de 3000 pour le deploiement en ligne
     console.log('Votre app est disponible sur localhost:3000 !')
  })
