@@ -31,10 +31,10 @@
           <v-img src="../../assets/user.png"></v-img>
         </div>
         </div>
-        <span class="titre">Mes outils</span>
+        <span class="titre">Mes cours</span>
         <div class="card">
           <v-card id="qcm" elevation="8">
-            <v-card-title class="justify-center">QCM</v-card-title>
+            <v-card-title class="justify-center">QCM1</v-card-title>
             <v-card-text class="text-center">
               <img
                 src="../../assets/questionnaire.png"
@@ -45,41 +45,6 @@
                 <v-btn flat color="orange">Créer</v-btn>
             </v-card-text>
           </v-card>
-          <v-card id="sondage" elevation="8">
-            <v-card-title class="justify-center">Sondage</v-card-title>
-            <v-card-text class="text-center">
-              <img src="../../assets/sondage.png" alt="Icon" style="max-height: 50px; max-width: 50px" />
-              <br />
-              <v-btn flat disabled color="grey">A venir</v-btn>
-            </v-card-text>
-          </v-card>
-          <v-card id = "brainstorming" elevation="8">
-                <v-card-title class="justify-center">Brainstorming</v-card-title>
-                <v-card-text class=text-center>
-                <img src="../../assets/brainstorming.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /><br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
-            <v-card id="loadingbar" elevation="8">
-                <v-card-title class="justify-center">Loading Bar</v-card-title>
-                <v-card-text class=text-center>
-                <img src="../../assets/loading.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /><br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
-            <v-card id="text" elevation="8">
-                <v-card-title class="justify-center">Textes à trous</v-card-title>
-                <v-card-text class=text-center>
-                <img src="../../assets/text.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /> <br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
         </div>
       </div>
     </div>
