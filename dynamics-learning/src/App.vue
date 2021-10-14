@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <stats />
     <Qcm/>
     <!-- A afficher quand le qcm aura été selectionné et que l'étudiant aura entré le bon mdp
     <ReponseQcm :qcm="qcmSelectione"/>
@@ -9,6 +10,7 @@
 
 <script>
 //import ReponseQcm from "./components/etudiant/ReponseQcm"
+import Stats from './components/enseignant/Stats.vue';
 
 import Qcm from "./components/enseignant/Qcm";
 
@@ -17,8 +19,9 @@ export default {
   name: 'App',
 
   components: {
+   //ReponseQcm,
+    Stats,
     Qcm
-    //ReponseQcm
   },
 
   data: () => ({
