@@ -1,99 +1,46 @@
 <template>
-  <div class="accueil">
-    <div class="contenu">
-      <v-navigation-drawer permanent width="600">
-        <div class="logo">
-          <v-img src="./assets/logo.png"></v-img>
-        </div>
-        <v-list nav dense>
-          <button class="button" x-large>Mes cours</button>
-          <button class="button" x-large>Mes outils</button>
-          <button class="button" x-large>Mes statistiques</button>
-          <button class="button" x-large>Paramètres</button>
-        </v-list>
-        <div class="image">
-          <v-img src="./assets/image.jpg"></v-img>
-        </div>
-      </v-navigation-drawer>
-      <div class="outils">
-        <div class="haut">
-            <form class="searchBar">
-              <label>
-                <input
-                  placeholder="Search..."
-                  class="form-control"
-                  type="text"
-                  name="name"
-                  v-model="name"
-                />
-              </label>
-            </form>
-            <div class="user">
-          <v-img src="./assets/user.png"></v-img>
-        </div>
-        </div>
-        <span class="titre">Mes outils</span>
-        <div class="card">
-          <v-card id="qcm" elevation="8">
-            <v-card-title class="justify-center">QCM</v-card-title>
-            <v-card-text class="text-center">
-              <img
-                src="./assets/questionnaire.png"
-                alt="Icon"
-                style="max-height: 50px; max-width: 50px"
-              />
-              <br />
-              <router-link to="/Qcm">
-                <v-btn flat color="orange">Créer</v-btn>
-              </router-link>
-            </v-card-text>
-          </v-card>
-          <v-card id="sondage" elevation="8">
-            <v-card-title class="justify-center">Sondage</v-card-title>
-            <v-card-text class="text-center">
-              <img src="./assets/sondage.png" alt="Icon" style="max-height: 50px; max-width: 50px" />
-              <br />
-              <v-btn flat disabled color="grey">A venir</v-btn>
-            </v-card-text>
-          </v-card>
-          <v-card id = "brainstorming" elevation="8">
-                <v-card-title class="justify-center">Brainstorming</v-card-title>
-                <v-card-text class=text-center>
-                <img src="./assets/brainstorming.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /><br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
-            <v-card id="loadingbar" elevation="8">
-                <v-card-title class="justify-center">Loading Bar</v-card-title>
-                <v-card-text class=text-center>
-                <img src="./assets/loading.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /><br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
-            <v-card id="text" elevation="8">
-                <v-card-title class="justify-center">Textes à trous</v-card-title>
-                <v-card-text class=text-center>
-                <img src="./assets/text.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /> <br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
-        </div>
+  <div>
+    <div class="accueil" v-if="!etudiant && !enseignant">
+      <div class="logo">
+        <v-img src="./assets/logo.png"></v-img>
       </div>
+      <div class="buttons">
+        <button class="button1" x-large @click="acceuilens()">Enseignant</button>
+        <button class="button2" x-large @click="acceuiletu()">Etudiant</button>
+      </div>
+    </div>
+    <div v-if="enseignant">
+      <Accueilens />
+    </div>
+    <div v-if="etudiant">
+      <Accueiletu />
     </div>
   </div>
 </template>
 
 <script>
+import Accueilens from "./components/enseignant/Accueilens.vue";
+import Accueiletu from "./components/etudiant/Accueiletu.vue";
 export default {
   name: "App",
-  components: {},
-  data: () => ({})
+
+  components: {
+    Accueilens,
+    Accueiletu
+  },
+
+  data: () => ({
+    etudiant: false,
+    enseignant: false
+  }),
+  methods: {
+    acceuilens: function() {
+      this.enseignant = true;
+    },
+    acceuiletu: function() {
+      this.etudiant = true;
+    }
+  }
 };
 </script>
 
@@ -103,10 +50,9 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  /*align-items: center;*/
-  /*justify-content: center;*/
+  align-items: center;
+  justify-content: center;
   /*margin-left: 300px;*/
-  min-height: 100vh;
 }
 
 .logo {
@@ -114,97 +60,83 @@ export default {
   background-position: center;
   background-size: cover;*/
   align-items: center;
-  justify-content: center;
-  width: 60%;
-  height: 60%;
-  display: flex;
-  /*flex-direction: row;*/
-  margin-top: 30px;
-  margin-left: 20%;
-  margin-bottom: 30%;
-}
-
-.image {
-  width: 80%;
-  height: 80%;
-  margin-left: 10%;
-  margin-top: 250px;
-}
-
-.contenu {
-  display: flex;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  flex: 1;
-  justify-content: space-between;
-}
-
-.outils {
-  width: 100%;
-  border-left-style: groove;
-  border-width: 0.5ex;
-}
-
-.button {
-  width: 300px;
-  height: 70px;
-  font-size: 40px;
-  font-weight: 200;
-  outline: 0;
-  cursor: pointer;
-  position: relative;
-  margin-top: 50px;
-}
-
-.titre {
-  text-align: center;
-  height: 5%;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 100px;
-  margin-top: 20px;
-}
-
-.card {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#qcm,
-#sondage,
-#brainstorming,
-#loadingbar,
-#text {
-  width: 30%;
-  background-color: rgb(224, 221, 221);
-  margin: 5%;
-}
-
-.haut{
-  height:10%;
+  width: 40%;
+  height: 40%;
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  margin-top: 150px;
 }
 
-.searchBar {
-  margin-left: 40px;
-  margin-top: 50px;
-  font-size: 40px;
+.buttons {
+  width: 40%;
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.button1 {
+  width: 500px;
+  height: 120px;
+  margin-right: 150px;
+  font-size: 30px;
   font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
 }
 
-.form-control {
-  border: solid 1px;
-  border-radius: 10px;
+.button2 {
+  width: 500px;
+  height: 120px;
+  font-size: 30px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
 }
 
-.user {
-  width:6%;
-  height: 6%;
-  margin-right: 60px;
-  margin-top: 40px;
+.button1::after {
+  content: "";
+  background-color: #5dade2;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 15px;
+  left: 15px;
+  transition: 0.2s;
 }
 
+.button2::after {
+  content: "";
+  background-color: #5dade2;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 15px;
+  left: 15px;
+  transition: 0.2s;
+}
+
+.button1:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
+.button2:hover::after {
+  top: 0px;
+  left: 0px;
+}
 </style>
