@@ -32,66 +32,34 @@
           <v-img src="../../assets/user.png"></v-img>
         </div>
         </div>
-        <span class="titre">Mes outils</span>
-        <div class="card">
-          <v-card id="qcm" elevation="8">
-            <v-card-title class="justify-center">QCM</v-card-title>
-            <v-card-text class="text-center">
-              <img
-                src="../../assets/questionnaire.png"
-                alt="Icon"
-                style="max-height: 50px; max-width: 50px"
-              />
-              <br />
-                <v-btn flat color="orange">Créer</v-btn>
-            </v-card-text>
-          </v-card>
-          <v-card id="sondage" elevation="8">
-            <v-card-title class="justify-center">Sondage</v-card-title>
-            <v-card-text class="text-center">
-              <img src="../../assets/sondage.png" alt="Icon" style="max-height: 50px; max-width: 50px" />
-              <br />
-              <v-btn flat disabled color="grey">A venir</v-btn>
-            </v-card-text>
-          </v-card>
-          <v-card id = "brainstorming" elevation="8">
-                <v-card-title class="justify-center">Brainstorming</v-card-title>
-                <v-card-text class=text-center>
-                <img src="../../assets/brainstorming.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /><br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
-            <v-card id="loadingbar" elevation="8">
-                <v-card-title class="justify-center">Loading Bar</v-card-title>
-                <v-card-text class=text-center>
-                <img src="../../assets/loading.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /><br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
-            <v-card id="text" elevation="8">
-                <v-card-title class="justify-center">Textes à trous</v-card-title>
-                <v-card-text class=text-center>
-                <img src="../../assets/text.png" alt="Icon" 
-                style="max-height: 50px; max-width: 50px"
-                /> <br>
-                <v-btn flat disabled color="grey">A venir</v-btn>
-                </v-card-text>
-            </v-card>
-        </div>
+        <span class="titre" v-if="!clickqcm">Mes outils</span>
+        <span class="titre" v-if="clickqcm">Creation d'un QCM</span>
+        <Outils  v-if="!clickqcm" @recupdonnees="affichageqcm()"/>
+        <Qcm  v-if="clickqcm"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Outils from "./Outils.vue"
+
+import Qcm from "./Qcm.vue"
+
 export default {
   name: "accueilens",
-  components: {},
-  data: () => ({})
+  components: {
+    Outils,
+    Qcm
+  },
+  data: () => ({
+    clickqcm: false,
+  }),
+  methods:{
+    affichageqcm: function() {
+      this.clickqcm = true;
+    }
+  }
 };
 </script>
 

@@ -37,6 +37,6 @@ io.on('connection', (socket) => {
 
 });
 
-server.listen(3001, function () {  // mettre process.env.PORT à la place de 3000 pour le deploiement en ligne
+server.listen(3000, function () {  // mettre process.env.PORT à la place de 3000 pour le deploiement en ligne
     console.log('Votre app est disponible sur localhost:3000 !')
  })

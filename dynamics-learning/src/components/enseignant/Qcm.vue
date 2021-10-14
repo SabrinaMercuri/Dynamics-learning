@@ -1,7 +1,5 @@
 <template>
     <div class="all">
-
-      <h1> Création de QCM </h1>
         <v-card class="top"  elevation="12">
         <!-- Nom du Qcm -->
         <h1>Nom du QCM :</h1>
@@ -53,13 +51,8 @@
             <v-btn @click="removeQuestion()" color="error"> supprimer une question</v-btn>
             <br>
             <br>
-            <br>
-            <v-toolbar
-      dark
-      prominent
-      src=""
-    >
-            
+            <br>            
+        </div>
             <!-- // Bouton envoyer le QCM 
             // Reste a faire : 
                 // - Envoyer le QCM -->
@@ -68,8 +61,6 @@
             
             <!-- // Bouton reinitialiser lee formulaire -->
             <v-btn color="error" class="mr-4" @click="reset">Réinitialiser le formulaire</v-btn>
-            </v-toolbar>
-        </div>
         </v-form>
     </div>
 </template>
@@ -145,6 +136,7 @@ background-color: #f6e58d;
   
  
   margin: 0 auto;
+  margin-top: 150px;
 }
 
 .question{

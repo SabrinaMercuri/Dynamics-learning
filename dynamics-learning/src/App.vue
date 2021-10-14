@@ -10,8 +10,7 @@
       </div>
     </div>
     <div v-if="enseignant">
-      <Accueilens v-if="!clickqcm" @recupdonnees="affichageqcm()"/>
-      <Qcm v-if="clickqcm"/>
+      <Accueilens/>
     </div>
     <div v-if="etudiant">
       <Accueiletu />
@@ -33,7 +32,6 @@ export default {
   data: () => ({
     etudiant: false,
     enseignant: false,
-    clickqcm: false,
   }),
   methods: {
     acceuilens: function() {
@@ -41,9 +39,6 @@ export default {
     },
     acceuiletu: function() {
       this.etudiant = true;
-    },
-    affichageqcm: function() {
-      this.clickqcm = true;
     }
   }
 };
