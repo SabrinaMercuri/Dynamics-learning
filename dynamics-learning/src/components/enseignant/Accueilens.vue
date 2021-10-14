@@ -7,8 +7,8 @@
         </div>
         <v-list nav dense>
           <button class="button" x-large>Mes cours</button>
-          <button class="button" x-large>Mes outils</button>
-          <button class="button" x-large>Mes statistiques</button>
+          <button class="button" x-large @click="afficheOutil()">Mes outils</button>
+          <button class="button" x-large @click="afficheStats()">Mes statistiques</button>
           <button class="button" x-large>Paramètres</button>
         </v-list>
         <div class="image">
@@ -32,10 +32,12 @@
           <v-img src="../../assets/user.png"></v-img>
         </div>
         </div>
-        <span class="titre" v-if="!clickqcm">Mes outils</span>
-        <span class="titre" v-if="clickqcm">Creation d'un QCM</span>
-        <Outils  v-if="!clickqcm" @recupdonnees="affichageqcm()"/>
-        <Qcm  v-if="clickqcm"/>
+        <span class="titre" v-if="!clickqcm && !stats">Mes outils</span>
+        <span class="titre" v-if="clickqcm && !stats">Creation d'un QCM</span>
+        <span class="titre" v-if="!clickqcm && stats">Statistiques</span>
+        <Outils  v-if="!clickqcm && !stats" @recupdonnees="affichageqcm()"/>
+        <Qcm  v-if="clickqcm && !stats"/>
+        <Stats v-if="!clickqcm && stats"/>
       </div>
     </div>
   </div>
@@ -43,21 +45,33 @@
 
 <script>
 import Outils from "./Outils.vue"
-
+import Stats from "./Stats.vue"
 import Qcm from "./Qcm.vue"
 
 export default {
   name: "accueilens",
   components: {
     Outils,
+    Stats,
     Qcm
   },
   data: () => ({
     clickqcm: false,
+    stats:false,
+    name: ""
   }),
   methods:{
     affichageqcm: function() {
       this.clickqcm = true;
+      this.stats = false;
+    },
+    afficheOutil: function() {
+      this.clickqcm = false;
+      this.stats = false;
+    },
+    afficheStats: function() {
+      this.clickqcm = false;
+      this.stats = true;
     }
   }
 };

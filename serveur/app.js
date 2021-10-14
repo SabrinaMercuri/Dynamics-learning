@@ -8,7 +8,7 @@ const qcms = []
 
 // ajout de socket.io
 const server = require('http').Server(app)
-const stats = [[true,false,true],[false,false,false]]
+const stats = []
 const io = require('socket.io')(server, {
    cors: {
       origin: '*',
@@ -33,6 +33,11 @@ io.on('connection', (socket) => {
     socket.on('sendQcm',(data) => {
       console.log(data)
       qcms[qcms.length] = data
+    })
+
+    socket.on('recupQcm', () => {
+       console.log('reception demande qcm')
+       socket.emit('getQcm',qcms)
     })
 
 });

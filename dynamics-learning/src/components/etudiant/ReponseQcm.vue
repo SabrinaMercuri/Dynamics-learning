@@ -10,7 +10,6 @@
             v-for="(reponse, index2) in getAnswer(question)"
             :key="index2"
             :label="reponse"
-            :color="isTrueRep(question, reponse)"
             @change="verifReponse(question,reponse,index,1)"
           ></v-radio>
         </v-radio-group>
@@ -21,7 +20,6 @@
         <div v-for="(reponse, index3) in getAnswer(question)" :key="index3">
           <v-checkbox
             :label="reponse"
-            :color="isTrueRep(question, reponse)"
             @change="verifReponse(question,reponse,index,index3)"
           ></v-checkbox>
         </div>
@@ -89,6 +87,7 @@ export default {
     envoiReponse: function(){
       this.verifMultiRep()
       this.$socket.emit("envoiReponse",this.repEnvoyees)
+      this.$emit("finQcm")
     },
     verifReponse: function(question,reponse,index,index2){
       let trueRep = false

@@ -6,8 +6,8 @@
           <v-img src="../../assets/logo.png"></v-img>
         </div>
         <v-list nav dense>
-          <button class="button" x-large>Mes cours</button>
-          <button class="button" x-large>Mes statistiques</button>
+          <button class="button" x-large @click="afficheCours()">Mes cours</button>
+          <button class="button" x-large @click="afficheStats()">Mes statistiques</button>
           <button class="button" x-large>Paramètres</button>
         </v-list>
         <div class="image">
@@ -31,10 +31,12 @@
           <v-img src="../../assets/user.png"></v-img>
         </div>
         </div>
-        <span class="titre">Mes cours</span>
-        <div class="card">
-          <v-card id="qcm" elevation="8">
-            <v-card-title class="justify-center">QCM1</v-card-title>
+        <span class="titre" v-if="!selectione && !stats">Mes cours</span>
+        <span class="titre" v-if="selectione && !stats">Repondez au QCM</span>
+        <span class="titre" v-if="!selectione && stats">Statistiques</span>
+        <div class="card" v-if="!selectione && !stats">
+          <v-card id="qcm" elevation="8" v-for="(qcm,index) in qcms" :key="index">
+            <v-card-title class="justify-center">QCM - {{ qcm.nom }}</v-card-title>
             <v-card-text class="text-center">
               <img
                 src="../../assets/questionnaire.png"
@@ -42,20 +44,65 @@
                 style="max-height: 50px; max-width: 50px"
               />
               <br />
-                <v-btn flat color="orange">Créer</v-btn>
+                <v-btn flat color="orange" @click="faireQcm(qcm)">Rejoindre</v-btn>
             </v-card-text>
           </v-card>
         </div>
+        <ReponseQcm v-if="selectione && !stats" @finQcm="finQcm()" :qcm="qcmSelectione"/>
+        <Stats v-if="!selectione && stats"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ReponseQcm from "./ReponseQcm"
+import Stats from "../enseignant/Stats"
+
 export default {
   name: "accueiletu",
-  components: {},
-  data: () => ({})
+  components: {
+    ReponseQcm,
+    Stats
+  },
+  data: () => ({
+    qcms: [],
+    qcmSelectione: {},
+    selectione: false,
+    name: "",
+    stats: false
+  }),
+  created(){
+    console.log("recup qcm")
+    this.$socket.emit("recupQcm")
+  },
+  sockets:{
+    getQcm: function(qcms){
+      this.qcms = qcms 
+      console.log("qcm récupéré")
+    }
+  },
+  methods:{
+    faireQcm: function(qcm){
+      this.qcmSelectione = qcm
+      this.selectione = true
+      this.stats = false
+    },
+    afficheStats: function(){
+      this.selectione = false
+      this.stats = true
+    },
+    afficheCours: function(){
+      this.selectione = false
+      this.stats = false
+      this.$socket.emit("recupQcm")
+    },
+    finQcm: function(){
+      this.selectione = false
+      this.stats = false
+      this.$socket.emit("recupQcm")
+    }
+  }
 };
 </script>
 
