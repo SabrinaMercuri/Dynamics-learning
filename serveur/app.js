@@ -4,9 +4,11 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+const qcms = []
 
 // ajout de socket.io
 const server = require('http').Server(app)
+const stats = [[true,false,true],[false,false,false]]
 const io = require('socket.io')(server, {
    cors: {
       origin: '*',
@@ -16,6 +18,22 @@ const io = require('socket.io')(server, {
 io.on('connection', (socket) => {
 
     console.log(`Connecté au client ${socket.id}`);
+
+
+    socket.on('envoiReponse',(data) => {
+       console.log("envoie de réponse : ")
+       console.log(data)
+        stats[stats.length] = data;
+    })
+
+    socket.on('demandeReponse',() =>{
+       socket.emit('envoieReponseStats',stats)
+    })
+
+    socket.on('sendQcm',(data) => {
+      console.log(data)
+      qcms[qcms.length] = data
+    })
 
 });
 
