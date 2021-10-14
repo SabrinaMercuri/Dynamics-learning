@@ -32,8 +32,8 @@
           <v-img src="./assets/user.png"></v-img>
         </div>
         </div>
+        <span class="titre">Mes outils</span>
         <div class="card">
-          <span class="titre">Mes outils</span>
           <v-card id="qcm" elevation="8">
             <v-card-title class="justify-center">QCM</v-card-title>
             <v-card-text class="text-center">
@@ -162,6 +162,13 @@ export default {
   height: 5%;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 100px;
+  margin-top: 20px;
+}
+
+.card {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #qcm,
