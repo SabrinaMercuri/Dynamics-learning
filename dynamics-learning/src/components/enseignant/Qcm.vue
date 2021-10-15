@@ -68,10 +68,10 @@
         </v-card>
         <br />
         <br />
-        <v-btn @click="addQuestion()">
+        <v-btn id="button" @click="addQuestion()">
           ajouter une question</v-btn
         >
-        <v-btn @click="removeQuestion()">
+        <v-btn id="button" @click="removeQuestion()">
           supprimer une question</v-btn
         >
         <br />
@@ -82,10 +82,10 @@
             // Reste a faire : 
                 // - Envoyer le QCM -->
 
-      <v-btn @click="envoyerQcm()"> envoyer le qcm</v-btn>
+      <v-btn id="button" @click="envoyerQcm()"> envoyer le qcm</v-btn>
 
       <!-- // Bouton reinitialiser lee formulaire -->
-      <v-btn class="mr-4" @click="reset"
+      <v-btn id="button" class="mr-4" @click="reset"
         >Réinitialiser le formulaire</v-btn
       >
     </v-form>
@@ -167,6 +167,13 @@ export default {
   padding: 2%;
   text-align: center;
 }
+
+#button {
+  font-size: 20px;
+  margin-right: 30px;
+  margin-left: 20px;
+}
+
 </style>
 
 ```
