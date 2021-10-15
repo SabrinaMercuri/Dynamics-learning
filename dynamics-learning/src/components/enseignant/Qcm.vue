@@ -3,14 +3,14 @@
     <v-card class="top" elevation="12">
       <!-- Nom du Qcm -->
       <h1>Nom du QCM :</h1>
-      <v-text-field
+      <v-text-field id="text"
         v-model="qcm.nom"
         label="Nom du QCM"
         required
       ></v-text-field>
       <!-- Mdp du Qcm -->
       <h1>Mot de passe du QCM :</h1>
-      <v-text-field
+      <v-text-field id="text"
         v-model="qcm.mdp"
         label="Mdp du QCM"
         required
@@ -29,7 +29,7 @@
           <br />
           <br />
           <h2>Intitule de la question :</h2>
-          <v-text-field
+          <v-text-field id="text"
             v-model="qcm.questions[index].intitule"
             label="Intitule de la question"
             required
@@ -37,7 +37,7 @@
           ></v-text-field>
           <!-- Mauvaises réponse de la question -->
           <h2>Mauvaise réponses :</h2>
-          <v-text-field
+          <v-text-field id="text"
             v-for="(fausseRep, index2) in qcm.questions[index].falseRep"
             :key="index2"
             v-model="qcm.questions[index].falseRep[index2]"
@@ -54,7 +54,7 @@
           -------------------------------
           <br />
           <h2>Bonnes réponses :</h2>
-          <v-text-field
+          <v-text-field id="text"
             v-for="(vraiRep, index3) in qcm.questions[index].trueRep"
             :key="index3"
             v-model="qcm.questions[index].trueRep[index3]"
@@ -172,6 +172,11 @@ export default {
   font-size: 20px;
   margin-right: 30px;
   margin-left: 20px;
+}
+
+#text {
+  height: 70px;
+  font-size: 30px;
 }
 
 </style>
