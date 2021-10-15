@@ -36,7 +36,7 @@
         <span class="titre" v-if="clickqcm && !stats">Creation d'un QCM</span>
         <span class="titre" v-if="!clickqcm && stats">Statistiques</span>
         <Outils  v-if="!clickqcm && !stats" @recupdonnees="affichageqcm()"/>
-        <Qcm  v-if="clickqcm && !stats"/>
+        <Qcm  v-if="clickqcm && !stats" @sendQcm="afficheOutil()"/>
         <Stats v-if="!clickqcm && stats"/>
       </div>
     </div>
