@@ -21,9 +21,18 @@ io.on('connection', (socket) => {
 
 
     socket.on('envoiReponse',(data) => {
-       console.log("envoie de réponse : ")
-       console.log(data)
-        stats[stats.length] = data;
+        stats[stats.length] = data.rep;
+        for(let i=0;i<qcms.length;i++){
+           if(data.nom===qcms[i].nom){
+              let repJ=0
+              for(let j=0;j<data.rep.length;j++){
+                 if(data.rep[j]){
+                    repJ++
+                 }
+              }
+              qcms[i].resultat=repJ
+           }
+        }
     })
 
     socket.on('demandeReponse',() =>{
@@ -31,12 +40,10 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sendQcm',(data) => {
-      console.log(data)
       qcms[qcms.length] = data
     })
 
     socket.on('recupQcm', () => {
-       console.log('reception demande qcm')
        socket.emit('getQcm',qcms)
     })
 

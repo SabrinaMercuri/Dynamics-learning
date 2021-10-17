@@ -1,5 +1,5 @@
 <template>
-  <div class="accueil">
+  <div class="accueil" :key="render">
     <div class="contenu">
       <v-navigation-drawer permanent width="600">
         <div class="logo">
@@ -37,6 +37,8 @@
         <div class="card" v-if="!selectione && !stats">
           <v-card id="qcm" elevation="8" v-for="(qcm,index) in qcms" :key="index">
             <v-card-title class="justify-center">QCM - {{ qcm.nom }}</v-card-title>
+            <v-card-title v-if="qcm.resultat===undefined" class="justify-center">Résultat :</v-card-title>
+            <v-card-title v-if="qcm.resultat!==undefined" class="justify-center">Résultat : {{ qcm.resultat }} / {{ qcm.questions.length }} </v-card-title>
             <v-card-text class="text-center">
               <img
                 src="../../assets/questionnaire.png"
@@ -70,7 +72,8 @@ export default {
     qcmSelectione: {},
     selectione: false,
     name: "",
-    stats: false
+    stats: false,
+    render:0
   }),
   created(){
     console.log("recup qcm")
@@ -97,10 +100,11 @@ export default {
       this.stats = false
       this.$socket.emit("recupQcm")
     },
-    finQcm: function(){
+    finQcm: async function(){
       this.selectione = false
       this.stats = false
       this.$socket.emit("recupQcm")
+      this.render++
     }
   }
 };

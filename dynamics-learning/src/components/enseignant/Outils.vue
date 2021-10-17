@@ -38,7 +38,7 @@
                 <v-btn flat disabled color="grey">A venir</v-btn>
                 </v-card-text>
             </v-card>
-            <v-card id="text" elevation="8">
+            <v-card id="texti" elevation="8">
                 <v-card-title class="justify-center">Textes à trous</v-card-title>
                 <v-card-text class=text-center>
                 <img src="../../assets/text.png" alt="Icon" 
@@ -70,7 +70,7 @@ export default {
 #sondage,
 #brainstorming,
 #loadingbar,
-#text {
+#texti{
   width: 30%;
   background-color: rgb(224, 221, 221);
   margin: 5%;

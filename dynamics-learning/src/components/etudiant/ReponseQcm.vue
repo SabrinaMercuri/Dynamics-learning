@@ -86,7 +86,7 @@ export default {
     },
     envoiReponse: function(){
       this.verifMultiRep()
-      this.$socket.emit("envoiReponse",this.repEnvoyees)
+      this.$socket.emit("envoiReponse",{rep:this.repEnvoyees,nom:this.qcm.nom})
       this.$emit("finQcm")
     },
     verifReponse: function(question,reponse,index,index2){
